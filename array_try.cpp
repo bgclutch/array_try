@@ -6,22 +6,24 @@ void array_print(int *arr, const unsigned int size_x, const unsigned int size_y)
 
 void stair_print(int *arr, const unsigned int main_size);
 
+void sum_matrix(int *arr_1, int *arr_2, int *arr_3, const unsigned int size_x, const unsigned int size_y);
+
 int main(void)
 {
     //printf("input size of your array[rows][cols]:\n\n");  
 
     //printf("number to input %u\n\n", main_size);
 
-    const unsigned int size_x = 5;
-    const unsigned int size_y = 5;
-    unsigned int main_size = 0;
+    // const unsigned int size_x = 5;
+    // const unsigned int size_y = 5;
+    // unsigned int main_size = 0;
 
-    for(unsigned int counter = size_x; counter - 1 > 0; counter--)
-        {
-            main_size += (counter - 1);
-        }
+    // for(unsigned int counter = size_x; counter - 1 > 0; counter--)
+    //     {
+    //         main_size += (counter - 1);
+    //     }
 
-    printf("number to input %u\n\n", main_size);
+    //printf("number to input %u\n\n", main_size);
 
     //printf("input your array's elements:\n");
 
@@ -34,14 +36,29 @@ int main(void)
     //unsigned int main_size = 0;
 
     
-    int arr[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    int array[25] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25};
+    // int arr[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    // int array[25] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25};
 
-    printf("\n\n");
+    // printf("\n\n");
 
-    array_print(array, size_x, size_y);
-    printf("\n");
-    stair_print(arr, main_size);
+    // array_print(array, size_x, size_y);
+    // printf("\n");
+    // stair_print(arr, main_size);
+
+    const unsigned int x = 3;
+    const unsigned int y = 4;
+    int arr_sum_1[x][y] = {{10, 20, 30, 40},
+                           {50, 60, 70, 80},
+                           {90, 100, 110, 120}};
+
+    int arr_sum_2[x][y] = {{1, 2, 3, 4},
+                           {5, 6, 7, 8},
+                           {9, 11, 11, 13}};
+
+    int arr_res_sum[x][y] = {{0}};
+
+    sum_matrix(*arr_sum_1, *arr_sum_2, *arr_res_sum, x, y);
+    array_print(*arr_res_sum, x, y);
 
 
     return 0;
@@ -69,5 +86,18 @@ void stair_print(int *arr, const unsigned int main_size)
             printf("%u ", *((unsigned int*)arr + index));
         }
         printf("\n");
+    }
+}
+
+void sum_matrix(int *arr_1, int *arr_2, int *arr_3, const unsigned int size_x, const unsigned int size_y)
+{
+    for(unsigned int index_x = 0; index_x < size_x ; index_x++)
+    {
+        for(unsigned int index_y = 0; index_y < size_y; index_y++)
+        {                         
+            *((unsigned int*)arr_3 + index_x * size_y + index_y) = 
+            *((unsigned int*)arr_1 + index_x * size_y + index_y) +
+            *((unsigned int*)arr_2 + index_x * size_y + index_y);
+        }
     }
 }
