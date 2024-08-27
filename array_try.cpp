@@ -23,8 +23,8 @@ void array_print(int *arr, const unsigned int size_x)
     for(unsigned int index = 0; index < size_x; index++)
     {
         printf("%u element's address    = %p\n", index, arr + index);                      // address
-        printf("size_t + index         = %lu\n", (size_t)arr + index);                     // size of element's address in bytes
-        printf("address                = %p\n", (int*)(size_t)arr + index);                // address
+        printf("size_t + index         = %lu\n", (size_t)arr + index);                     // size of element's address in bytes 
+        printf("address                = %p\n", (int*)(size_t)arr + index);                // address changes dex size to hex address
         printf("element                = %u\n\n", *((unsigned int*)(size_t)arr + index));  // element
     }
 }
