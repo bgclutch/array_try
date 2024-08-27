@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void array_print(int *arr, const int size_x, const int size_y);
+void array_print(int *arr, const unsigned int size_x);
 
 int main(void)
 {
@@ -10,18 +10,21 @@ int main(void)
     scanf("%d", &ar_size);
     */
     const int SIZE_X = 5;
-    const int SIZE_Y = 3;
-    int array[SIZE_Y][SIZE_X] = {{10, 11, 12, 13, 14},
-                                 {20, 21, 22, 23, 24},
-                                 {30, 31, 32, 33, 34}}; //array initialization 
-
-    array_print(array, SIZE_Y, SIZE_X);
+    //const int SIZE_Y = 3;
+    int array[SIZE_X] = {10, 11, 12, 13, 14}; //array initialization 
+    printf("\n");
+    array_print(array, SIZE_X);
 
     return 0;
 }
 
-void array_print(int *arr, const int size_x, const int size_y)
+void array_print(int *arr, const unsigned int size_x)
 {
-    for(int index = 0; index < size; index++)
-        printf("array[%d] = %d\n", index, *(arr+index));
+    for(unsigned int index = 0; index < size_x; index++)
+    {
+        printf("%u element's address    = %p\n", index, arr + index);
+        printf("size_t + index         = %lu\n", (size_t)arr + index); //size of element's address in bytes
+        printf("address                = %p\n", (int*)(size_t)arr + index);
+        printf("element                = %u\n\n", *(int*)(size_t)arr + index);
+    }
 }
