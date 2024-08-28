@@ -19,27 +19,28 @@ int main(void)
 
     for(int i = 0; i < dynamic_rows; i++)
     {
-        printf("input len if your %d line:\n", i + 1);
+        printf("input len of your %d line:\n", i + 1);
         scanf("%d", (arrays_sizes + i));
         *(arrays_ptrs + i) = (int *) calloc((unsigned int)*(arrays_sizes + i), sizeof(int));
-        printf("%p\n\n", arrays_ptrs);
+        printf("%p\n\n", (arrays_ptrs + i));
     }
 
     for(int ar_ptr = 0; ar_ptr < dynamic_rows; ar_ptr++)
     {
         for(int dif_size = 0; dif_size < *(arrays_sizes + ar_ptr); dif_size++)
         {
-            printf("input %d element in %d line", dif_size + 1, ar_ptr + 1);
-            scanf("%d", ((*(arrays_ptrs) + dif_size) + ar_ptr));
+            printf("input %d element in %d line:\n", dif_size + 1, ar_ptr + 1);
+            scanf("%d", (*(arrays_ptrs + ar_ptr) + dif_size));
         }
+        printf("\n");
     }
 
 
-    for(int )
+    for(int ar_ptr = 0; ar_ptr < dynamic_rows; ar_ptr++)
     {
-        for()
+        for(int dif_size = 0; dif_size < *(arrays_sizes + ar_ptr); dif_size++)
         {
-
+            printf("%d ", *((*(arrays_ptrs + ar_ptr) + dif_size)));
         }
         printf("\n");
     }
