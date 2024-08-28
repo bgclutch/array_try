@@ -9,6 +9,9 @@ void process_arrs(const int dynamic_rows, const int* arrays_sizes, int** arrays_
 
 void outp_arrs(const int dynamic_rows, const int* arrays_sizes, int** arrays_ptrs);
 
+void cleaner(const int dynamic_rows, int* arrays_sizes, int** arrays_ptrs);
+
+
 int main(void)
 {
     printf("input number of lines:\n");
@@ -21,25 +24,13 @@ int main(void)
 
     int **arrays_ptrs  = (int **) calloc((unsigned int)dynamic_rows, sizeof(int*));
 
-    //printf("sizes = %p, ptrs = %p\n\n", arrays_sizes, arrays_ptrs);
-
     decl_arrs   (dynamic_rows, arrays_sizes, arrays_ptrs);
 
     process_arrs(dynamic_rows, arrays_sizes, arrays_ptrs);
 
     outp_arrs   (dynamic_rows, arrays_sizes, arrays_ptrs);
 
-    for(int i = 0; i < dynamic_rows; i++)
-    {
-        free(*(arrays_ptrs + i));
-        *(arrays_ptrs + i) = NULL;
-    }
-
-    free(arrays_sizes);
-    arrays_sizes = NULL;
-
-    free(arrays_ptrs);
-    arrays_ptrs = NULL;
+    cleaner     (dynamic_rows, arrays_sizes, arrays_ptrs);
 
     return 0;
 }
@@ -79,4 +70,19 @@ void outp_arrs(const int dynamic_rows, const int* arrays_sizes, int** arrays_ptr
         }
         printf("\n");
     }
+}
+
+void cleaner(const int dynamic_rows, int* arrays_sizes, int** arrays_ptrs)
+{
+    for(int i = 0; i < dynamic_rows; i++)
+    {
+        free(*(arrays_ptrs + i));
+        *(arrays_ptrs + i) = NULL;
+    }
+
+    free(arrays_sizes);
+    arrays_sizes = NULL;
+
+    free(arrays_ptrs);
+    arrays_ptrs = NULL;
 }
