@@ -2,13 +2,15 @@
 #include <stdlib.h>
 #include <assert.h>
 
-void array_print(int *arr, const unsigned int size_x, const unsigned int size_y);
+void array_print(int arr[], const int size_x, const int size_y);
 
 void stair_print(int *arr, const unsigned int main_size);
 
 void sum_matrix(int *arr_1, int *arr_2, int *arr_3, const unsigned int size_x, const unsigned int size_y);
 
-void matrix_times(int *arr_1, int *arr_2, int *arr_3, const unsigned int = rows, const unsigned int = cols)
+void matrix_times(int *arr_1, int *arr_2, int *arr_3, const int rows, const int cols);
+
+int sum_lines_and_cols_matrix(int *arr_1, int *arr_2, const int i_get, const int j_get, const int cols);
 
 int main(void)
 {
@@ -72,29 +74,42 @@ int main(void)
     
     // stair_print(arr, main_size);
 
-    int arr_matrix_1[2][3] = {{1, 2, 3},
-                              {4, 5, 6}};
+    const int rows_first  = 2;
+    const int rows_second = 3;
+    const int cols_first  = 3;
+    const int cols_second = 3;
 
-    int arr_matrix_2[3][3] = {{7, 7, 9},
-                              {10, 11, 12},
-                              {13, 14, 15}};
+    int arr_matrix_1[rows_first][cols_first] = {{1, 2, 3},
+                                                {4, 5, 6}};
 
-    int arr_matrix_result[2][3] = {{0}};
+    array_print(&arr_matrix_1[0][0], rows_first, cols_first);
 
-    matrix_times();
+    printf("\n");
 
-    array_print();
+    int arr_matrix_2[rows_second][cols_second] = {{ 7,  8,  9},
+                                                  {10, 11, 12},
+                                                  {13, 14, 15}};
+
+    array_print(&arr_matrix_2[0][0], rows_second, cols_second);
+
+    printf("\n");
+  
+    int arr_matrix_result[rows_first][cols_second] = {{0}};
+
+    matrix_times(&arr_matrix_1[0][0], &arr_matrix_2[0][0], &arr_matrix_result[0][0], rows_first, cols_second);
+
+    array_print(&arr_matrix_result[0][0], rows_first, cols_second);
 
     return 0;
 }
 
-void array_print(int *arr, const unsigned int size_x, const unsigned int size_y)
+void array_print(int arr[], const int size_x, const int size_y)
 {   
-    for(unsigned int index_x = 0; index_x < size_x ; index_x++)
+    for(int index_x = 0; index_x < size_x ; index_x++)
     {
-        for(unsigned int index_y = 0; index_y < size_y; index_y++)
+        for(int index_y = 0; index_y < size_y; index_y++)
         {                         
-            printf ("%u ", *((unsigned int*)arr + index_x * size_y + index_y));
+            printf ("%3u ", *((unsigned int*)arr + index_x * size_y + index_y));
         }
         printf("\n");
     }
@@ -125,26 +140,27 @@ void sum_matrix(int *arr_1, int *arr_2, int *arr_3, const unsigned int size_x, c
         }
     }
 }
-void matrix_times(int *arr_1, int *arr_2, int *arr_3, const unsigned int = rows, const unsigned int = cols)
+
+void matrix_times(int arr_1[], int arr_2[], int arr_3[], const int rows, const int cols)
 {
-    for(unsigned int i = 0; i < rows; i++)
+    for(int i = 0; i < rows; i++)
     {
-        for(unsigned int j = 0; j < cols; j++)
+        for(int j = 0; j < cols; j++)
         {
-            *((unsigned int*)arr_3 + i *  + j) = 
+            *(arr_3 + i * cols + j) = sum_lines_and_cols_matrix(arr_1, arr_2, i, j, cols);
 
         }
-    }
-    
+    } 
 }
 
-int sum_lines_and_cols()
+int sum_lines_and_cols_matrix(int arr_1[], int arr_2[], const int i_get, const int j_get, const int cols)
 {
     int sum = 0;
-    for(int i = 0; ; i++)
-        for(int j = 0; ; j++)
-        {
-            sum += *((unsigned int *)arr_1 + i * x + j)  
-        }
-    return ;
+
+    for(int j = 0, i = 0; j < cols; i++, j++)
+    {
+        sum += (*(arr_1 + i_get * cols + j)) * (*(arr_2 + j * cols + j_get));  
+    }
+
+    return sum;
 }
