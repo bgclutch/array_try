@@ -3,13 +3,15 @@
 #include <stdlib.h>
 #include <assert.h>
 
-void decl_arrs(const int dynamic_rows, int* arrays_sizes, int** arrays_ptrs);
+void decl_arrs   (const int dynamic_rows, int* arrays_sizes, int** arrays_ptrs);
 
 void process_arrs(const int dynamic_rows, const int* arrays_sizes, int** arrays_ptrs);
 
-void outp_arrs(const int dynamic_rows, const int* arrays_sizes, int** arrays_ptrs);
+void outp_arrs   (const int dynamic_rows, const int* arrays_sizes, int** arrays_ptrs);
 
-void cleaner(const int dynamic_rows, int* arrays_sizes, int** arrays_ptrs);
+void cleaner     (const int dynamic_rows, int* arrays_sizes, int** arrays_ptrs);
+
+void line_of_stars();
 
 
 int main(void)
@@ -17,20 +19,27 @@ int main(void)
     printf("input number of lines:\n");
 
     int dynamic_rows = 0;
+    
     scanf("%d", &dynamic_rows);
-    printf("\n");
+    line_of_stars();
 
-    int *arrays_sizes = (int *) calloc((unsigned int)dynamic_rows, sizeof(int));
+    int *arrays_sizes  = (int *)  calloc((unsigned int)dynamic_rows,  sizeof(int));
 
     int **arrays_ptrs  = (int **) calloc((unsigned int)dynamic_rows, sizeof(int*));
 
-    decl_arrs   (dynamic_rows, arrays_sizes, arrays_ptrs);
+    decl_arrs    (dynamic_rows, arrays_sizes, arrays_ptrs);
 
-    process_arrs(dynamic_rows, arrays_sizes, arrays_ptrs);
+    line_of_stars();
 
-    outp_arrs   (dynamic_rows, arrays_sizes, arrays_ptrs);
+    process_arrs (dynamic_rows, arrays_sizes, arrays_ptrs);
 
-    cleaner     (dynamic_rows, arrays_sizes, arrays_ptrs);
+    line_of_stars();
+
+    outp_arrs    (dynamic_rows, arrays_sizes, arrays_ptrs);
+
+    line_of_stars();
+
+    cleaner      (dynamic_rows, arrays_sizes, arrays_ptrs);
 
     return 0;
 }
@@ -45,6 +54,7 @@ void decl_arrs(const int dynamic_rows, int* arrays_sizes, int** arrays_ptrs)
         *(arrays_ptrs + i) = (int *) calloc((unsigned int)*(arrays_sizes + i), sizeof(int));
         //printf("%p\n\n", (arrays_ptrs + i));
     }
+    line_of_stars();
 }
 
 void process_arrs(const int dynamic_rows, const int* arrays_sizes, int** arrays_ptrs)
@@ -56,7 +66,7 @@ void process_arrs(const int dynamic_rows, const int* arrays_sizes, int** arrays_
             printf("input %d element in %d line:\n", dif_size + 1, ar_ptr + 1);
             scanf("%d", *(arrays_ptrs + ar_ptr) + dif_size);
         }
-        printf("\n");
+        line_of_stars();
     }
 }
 
@@ -85,4 +95,12 @@ void cleaner(const int dynamic_rows, int* arrays_sizes, int** arrays_ptrs)
 
     free(arrays_ptrs);
     arrays_ptrs = NULL;
+}
+
+void line_of_stars()
+{
+    printf("\n");
+    for(int i = 0; i < 50; i++)
+        printf("**");
+    printf("\n");
 }
